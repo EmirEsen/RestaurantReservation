@@ -129,6 +129,7 @@ public class ManagerServiceImpl implements IRestaurantManagementActivities, ICus
         System.out.println("-".repeat(header.length()));
     }
 
+    //returns available seats on given month and day
     @Override
     public int availabilityOnDate(Restaurant restaurant, int month, int day) {
         return restaurant.getCapacityOnMonthDay(month, day);
@@ -140,52 +141,58 @@ public class ManagerServiceImpl implements IRestaurantManagementActivities, ICus
             System.out.println(restaurant.getName() + " restaurant is closed.");
         }
 
-        List<Customer> customers;
-        String customerName = Util.stringScanner("Customer F.Name: ").trim();
-        String customerSurname = Util.stringScanner("Customer Surname: ").trim();
-        customers = Database.findCustomersWithName(customerName, customerSurname);
-
-        Customer customer;
-        if (customers != null) {
-            printCustomerList(customers);
-            do {
-                String customerId = Util.stringScanner("Customer Id: ");
-                customer = Database.findCustomerById(customerId);
-            } while (customer == null);
-        } else {
-            customer = addNewCustomer(customerName, customerSurname);
-        }
-
         LocalDateTime currentTime = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         //Kullaniciya girilmesi gereken tarih formatini gosterir.
         String str = Util.stringScanner("Date: [" + currentTime.format(dateTimeFormatter) + "]: ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime resDate = LocalDateTime.parse(str, formatter);
+
         int resMonth = resDate.getMonthValue();
         int resDay = resDate.getDayOfMonth();
+        int availablePlace = availabilityOnDate(restaurant, resMonth, resDay);
 
-        System.out.println(restaurant.getName().toUpperCase() + " -> " + availabilityOnDate(restaurant, resMonth, resDay) + " places are available on " + resDay + " " + resDate.getMonth().toString());
-        int headCount;
-        do {
-            headCount = Util.intScanner("Place for #: ");
-            if (headCount < 1) {
-                System.out.println("input can not be ZERO, Re-Enter.");
+        int headCount = 0;
+        if (availablePlace > 0) {
+            System.out.println(restaurant.getName().toUpperCase() + " -> " + availablePlace
+                    + " places are available on " + resDay + " " + resDate.getMonth().toString());
+            do {
+                headCount = Util.intScanner("Place for #: ");
+                if (headCount < 1) {
+                    System.out.println("input can not be ZERO, Re-Enter.");
+                }
+            } while (headCount < 1);
+
+            if (headCount > restaurant.getCapacityOnMonthDay(resMonth, resDay)) {
+                System.out.println("Sorry, only " + restaurant.getCapacityOnMonthDay(resMonth, resDay) + " places are available.");
+                return;
             }
-        } while (headCount < 1);
+            List<Customer> customers;
+            String customerName = Util.stringScanner("Customer F.Name: ").trim();
+            String customerSurname = Util.stringScanner("Customer Surname: ").trim();
+            customers = Database.findCustomersWithName(customerName, customerSurname);
 
-        if (headCount > restaurant.getCapacityOnMonthDay(resMonth, resDay)) {
-            System.out.println("Sorry, only " + restaurant.getCapacityOnMonthDay(resMonth, resDay) + " places are available.");
-            return;
+            Customer customer;
+            if (customers != null) {
+                printCustomerList(customers);
+                do {
+                    String customerId = Util.stringScanner("Customer Id: ");
+                    customer = Database.findCustomerById(customerId);
+                } while (customer == null);
+            } else {
+                customer = addNewCustomer(customerName, customerSurname);
+            }
+
+            Reservation reservation = new Reservation(customer.getId(),
+                    restaurant.getId(), resDate, headCount);
+
+            restaurant.getReservations().add(reservation);
+            restaurant.setCapacityOnMonthDay(resMonth, resDay, restaurant.getCapacityOnMonthDay(resMonth, resDay) - headCount);
+
+            restaurant.reservationSuccessMessage(customer, headCount, resDate.format(dateTimeFormatter));
+        } else {
+            System.out.println("Not available on " + resDay + " " + resDate.getMonth());
         }
-
-        Reservation reservation = new Reservation(customer.getId(),
-                restaurant.getId(), resDate, headCount);
-
-        restaurant.getReservations().add(reservation);
-        restaurant.setCapacityOnMonthDay(resMonth, resDay, restaurant.getCapacityOnMonthDay(resMonth, resDay) - headCount);
-
-        restaurant.reservationSuccessMessage(customer, headCount, resDate.format(dateTimeFormatter));
     }
 
     //helper method to lists found customers
@@ -202,6 +209,7 @@ public class ManagerServiceImpl implements IRestaurantManagementActivities, ICus
         Reservation res = restaurant.getReservationWithId();
         int resMonth = res.getTime().getMonthValue();
         int resDay = res.getTime().getDayOfMonth();
+
         if (res != null) {
             restaurant.getReservations().remove(res);
             System.out.println("X " + res + " HAS BEEN CANCELLED.");
