@@ -6,5 +6,5 @@ RestaurantManagement contains the main method. The program takes command-line in
 
 #### Program can do the following:
 * add new Restaurants with a daily reservation capacity
-* add customers to program
-* takes reservation for selected customer and restaurant on specific date and time
+* add customers
+* make a reservation for the registered/selected customer and restaurant on a specific date and time
