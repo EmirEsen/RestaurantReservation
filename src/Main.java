@@ -3,13 +3,9 @@ import Util.*;
 
 import java.time.LocalDateTime;
 
-
 public class Main {
-
     static ManagerServiceImpl managerService = new ManagerServiceImpl();
-
     public static void main(String[] args) {
-
         //Sample data for testing.
         Restaurant restaurant = new Restaurant("Dun Moda",
                 new Adress("Turkiye", "Istanbul", "Moda"), "0216-23", 50);
@@ -32,11 +28,12 @@ public class Main {
     }
 
     public static void systemMenu() {
-        System.out.println("-----SYSTEM MENU-----");
-        System.out.println("1- Reservation ops. ");
-        System.out.println("2- Restaurant ops. ");
-        System.out.println("3- Customer management ops.");
-        System.out.println("0- Quit");
+        System.out.println("""
+                -----SYSTEM MENU-----
+                 1- Reservation ops.
+                 2- Restaurant ops.
+                 3- Customer ops.
+                 0- Quit.""");
 
         while (true) {
             int input = Util.intScanner("input: ");
@@ -63,14 +60,16 @@ public class Main {
     }
 
     public static void restaurantMenu() {
-        System.out.println("-----RESTAURANT MENU-----");
-        System.out.println("1- Add new Restaurant");
-        System.out.println("2- Delete restaurant");
-        System.out.println("3- Search restaurant by name");
-        System.out.println("4- List all restaurants");
-        System.out.println("5- Show Options");
-        System.out.println("6- Back");
-        System.out.println("0- Quit");
+        System.out.println("""
+                -----RESTAURANT MENU-----
+                 1- Add new Restaurant
+                 2- Delete restaurant
+                 3- Search restaurant by name
+                 4- List all restaurants
+                 5- Show Options
+                 6- Back
+                 0- Quit
+                """);
 
         while (true) {
             int input = Util.intScanner("Input (5- for options): ");
@@ -105,12 +104,15 @@ public class Main {
         }
     }
 
+    //todo list reservations on a specific date
     public static void reservationMenu(Restaurant restaurant) {
-        System.out.println("--------- "+restaurant.getName().toUpperCase()+" ---------");
-        System.out.println("1- Take new Reservation");
-        System.out.println("2- Cancel Reservation");
-        System.out.println("3- List reservations");
-        System.out.println("4- Back");
+        System.out.println("--------- " + restaurant.getName().toUpperCase() + " ---------");
+        System.out.println(""" 
+                     1- Take new Reservation
+                     2- Cancel Reservation
+                     3- List reservations
+                     4- Back
+                    """);
 
         while (true) {
             int input = Util.intScanner("Input (5- for options): ");
@@ -132,17 +134,17 @@ public class Main {
                     reservationMenu(restaurant);
                     break;
             }
-
         }
     }
 
     public static void customerMenu() {
-        System.out.println("-----CUSTOMER MENU-----");
-        System.out.println("1- Add New Customer");
-        System.out.println("2- Delete Customer");
-        System.out.println("3- Search Customer by Name");
-        System.out.println("4- List All Customers");
-        System.out.println("5- Back");
+        System.out.println("""
+                        -----CUSTOMER MENU-----
+                         1- Add New Customer
+                         2- Delete Customer
+                         3- Search Customer by Name
+                         4- List All Customers
+                         5- Back""");
 
         while (true) {
             int input = Util.intScanner("Input (6- for options): ");
@@ -167,7 +169,6 @@ public class Main {
                     customerMenu();
                     break;
             }
-
         }
     }
 }
