@@ -4,7 +4,7 @@ RestaurantManagement contains the main method. The program takes command-line in
 
 ### A functinal command-line example project written in java to practive OOP principles and core java. 
 
-#### Program can do the following:
+#### Program can do the followings:
 * add new Restaurants with a daily reservation capacity
 * add customers
 * make a reservation for the registered/selected customer and restaurant on a specific date and time
