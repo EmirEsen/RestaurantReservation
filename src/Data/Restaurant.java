@@ -5,7 +5,6 @@ import Util.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-//Restoran secildikten sonra reservasyon islemlerinin yapilacagini varsaydigimdan rezervayon interfaceini Restaurant calssinda implemet ettim.
 public class Restaurant {
 
     //Restoran sinifi disindaki bir sinifin status'u olmayacagindan, Status Enum sinifini Restaurant sinifi icinde tanimladim.

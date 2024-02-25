@@ -19,7 +19,7 @@ public class ManagerServiceImpl implements IRestaurantManagementActivities, ICus
     }
 
     //Eger musteri kaydi bulunamazsa aranan musterinin isim ve soyisimi ile yeni kayit olusturulucak.
-    // Bu metod sayesinde kulanicidan tekrar isim soyisim istenmeyecek.
+    //Bu metod sayesinde kulanicidan tekrar isim soyisim istenmeyecek.
     @Override
     public Customer addNewCustomer(String name, String surname) {
         System.out.println("Continue for new registration --> ");
@@ -219,7 +219,7 @@ public class ManagerServiceImpl implements IRestaurantManagementActivities, ICus
 
     @Override
     public void listReservations(Restaurant restaurant) {
-        String header = "-".repeat(55) + restaurant.getName().toUpperCase() + " RESERVATIONS" + "-".repeat(55 - restaurant.getName().length());
+        String header = "-".repeat(65) + restaurant.getName().toUpperCase() + " RESERVATIONS" + "-".repeat(65 - restaurant.getName().length());
         System.out.println(header);
         restaurant.getReservations().forEach(System.out::println);
         System.out.println("-".repeat(header.length()));

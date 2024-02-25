@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 public class Main {
     static ManagerServiceImpl managerService = new ManagerServiceImpl();
+
     public static void main(String[] args) {
         //Sample data for testing.
         Restaurant restaurant = new Restaurant("Dun Moda",
@@ -42,7 +43,7 @@ public class Main {
                 case 1:
                     System.out.println("Choose Restaurant");
                     Restaurant restaurant = managerService.searchRestaurantByName();
-                    if(restaurant != null){
+                    if (restaurant != null) {
                         reservationMenu(restaurant);
                     }
                     break;
@@ -83,7 +84,7 @@ public class Main {
                     break;
                 case 3:
                     Restaurant restaurant = managerService.searchRestaurantByName();
-                    if(restaurant != null){
+                    if (restaurant != null) {
                         System.out.println(restaurant);
                     }
                     break;
@@ -108,11 +109,11 @@ public class Main {
     public static void reservationMenu(Restaurant restaurant) {
         System.out.println("--------- " + restaurant.getName().toUpperCase() + " ---------");
         System.out.println(""" 
-                     1- Take new Reservation
-                     2- Cancel Reservation
-                     3- List reservations
-                     4- Back
-                    """);
+                 1- Take new Reservation
+                 2- Cancel Reservation
+                 3- List reservations
+                 4- Back
+                """);
 
         while (true) {
             int input = Util.intScanner("Input (5- for options): ");
@@ -139,12 +140,12 @@ public class Main {
 
     public static void customerMenu() {
         System.out.println("""
-                        -----CUSTOMER MENU-----
-                         1- Add New Customer
-                         2- Delete Customer
-                         3- Search Customer by Name
-                         4- List All Customers
-                         5- Back""");
+                -----CUSTOMER MENU-----
+                 1- Add New Customer
+                 2- Delete Customer
+                 3- Search Customer by Name
+                 4- List All Customers
+                 5- Back""");
 
         while (true) {
             int input = Util.intScanner("Input (6- for options): ");
