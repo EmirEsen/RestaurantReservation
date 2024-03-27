@@ -7,6 +7,6 @@ RestaurantManagement contains the main method. The program takes command-line in
 #### Program can do the followings:
 * add new Restaurants with a daily reservation capacity
 * add customers
-* make a reservation for the registered/selected customer and restaurant on a specific date and time
+* make a reservation for the registered/selected customer to restaurant on a specific date and time
 
 ###### Software Development Bootcamp - Bilge Adam BOOST24 - exam2 project with an additional functionality to take reservation on a specific date and time.

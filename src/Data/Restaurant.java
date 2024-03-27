@@ -21,6 +21,7 @@ public class Restaurant {
     private Status status;
     private List<Reservation> reservations;
 
+    //initializing daily reservation capacity for only one year.
     public Restaurant(String name, Adress adress, String phoneNumber, int capacity) {
         for (int i = 0; i < monthDay.length; i++) {
             for (int j = 0; j < monthDay[i].length; j++) {
@@ -44,10 +45,10 @@ public class Restaurant {
         monthDay[month][day] = newCapacity;
     }
 
-    //Rezervayon alindiginda bilgilendirme mesaji yazar.
-    public void reservationSuccessMessage(Customer customer, int placeFor, String time) {
+    //print message for reservation
+    public void reservationSuccessMessage(Customer customer, int placesFor, String time) {
         System.out.println("A rezervation for " +
-                placeFor + " people in " + customer.getName() + " " +
+                placesFor + " people in " + customer.getName() + " " +
                 customer.getSurname() +
                 "'s name has been made for " + time);
     }

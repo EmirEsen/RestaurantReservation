@@ -105,7 +105,6 @@ public class Main {
         }
     }
 
-    //todo list reservations on a specific date
     public static void reservationMenu(Restaurant restaurant) {
         System.out.println("--------- " + restaurant.getName().toUpperCase() + " ---------");
         System.out.println(""" 

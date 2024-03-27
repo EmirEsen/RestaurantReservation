@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Database {
-
     private static List<Restaurant> restaurantList = new ArrayList<>();
     private static List<Customer> customerList = new ArrayList<>();
 
